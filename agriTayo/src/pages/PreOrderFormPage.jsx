@@ -35,7 +35,7 @@ function PreOrderFormPage() {
         agree: data.agree,
     };
 
-    fetch("http://localhost:5001/api/preorders", {
+    fetch("api/preorders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderData),

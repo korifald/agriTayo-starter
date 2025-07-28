@@ -16,11 +16,11 @@ function HomePage() {
   useEffect(() => {
      const fetchFarmers = async () => {
         try {
-          const res = await fetch("http://localhost:5001/api/farmers");
+          const res = await fetch("api/farmers");
           if (!res.ok) throw new Error("Failed to fetch farmer data.");
           const data = await res.json();
           setFarmers(data);
-          setSelectedFarmer(data[0] || nulll);
+          setSelectedFarmer(data[0] || null);
         } catch (err) {
           setError(err.message);
         } finally {
