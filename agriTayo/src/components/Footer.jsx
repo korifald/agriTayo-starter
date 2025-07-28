@@ -1,4 +1,10 @@
-import "../styles/Header.css";
+/**
+ * Footer
+ *
+ * Displays the page footer with the site logo, social media icons,
+ * and a tagline. Used globally across the site layout.
+ */
+import logo from "../assets/logo-i.png";
 
 function Footer() {
   return (
@@ -6,11 +12,7 @@ function Footer() {
       <div className="page-footer">
         <div className="logo-title">
           <a href="/">
-            <img
-              src="src/assets/logo-i.png"
-              alt="Logo"
-              className="logo-image"
-            />
+            <img src={logo} alt="Logo" className="logo-image" />
           </a>
           <h1 className="footer-title">
             agri<span className="yellow">Tayo</span>!

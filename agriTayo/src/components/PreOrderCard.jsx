@@ -1,5 +1,18 @@
 import { useState } from "react";
 
+/**
+ * PreOrderCard
+ * 
+ * Displays a form that allows users to submit a pre-order for a specific product.
+ * Includes validation for terms agreement and shows a success overlay after submission.
+ * 
+ * Props:
+ * - productId: ID of the product being ordered
+ * - onSubmit: function to handle form submission (receives form data + productId)
+ */
+
+
+
 function PreOrderCard({ productId, onSubmit }) {
   const [formData, setFormData] = useState({
     name: "",
@@ -28,26 +41,9 @@ function PreOrderCard({ productId, onSubmit }) {
       alert("You must agree to the terms and conditions.");
       return;
     }
-
-    onSubmit({
-        name: formData.name,
-        contact: formData.contact,
-        email: formData.email,
-        quantity: formData.quantity,
-        date: formData.date,
-        address: formData.address,
-        agree: formData.agree,
-        signature: formData.signature,
-        // not sending productID, parent component already has it
-    }, (success) => {
-        if (success) {
-        setShowOverlay(true);
-    } else {
-        alert("There was a problem submitting your preorder.");
-    }
-    });
+    onSubmit({ productId, ...formData });
+    setShowOverlay(true);
   };
-
   const handleOrderAgain = () => {
     setFormData({
       name: "",
@@ -168,7 +164,10 @@ function PreOrderCard({ productId, onSubmit }) {
       </div>
 
       <div className="checkbox-container">
-        <div>
+        <label
+          htmlFor="agree"
+          style={{ display: "flex", alignItems: "center", gap: "8px" }}
+        >
           <input
             type="checkbox"
             id="agree"
@@ -176,15 +175,12 @@ function PreOrderCard({ productId, onSubmit }) {
             checked={formData.agree}
             onChange={handleChange}
           />
-        </div>
-        <div>
-          <label htmlFor="agree">
-            I understand this is a pre-order and agree to the estimated delivery
-            window.
-          </label>
-        </div>
+          I understand this is a pre-order and agree to the estimated delivery
+          window.
+        </label>
       </div>
-      <div className="but-wwrap">
+
+      <div className="but-wrap">
         <button type="submit" className="submit-btn preorder-form-full">
           PLACE PRE-ORDER
         </button>

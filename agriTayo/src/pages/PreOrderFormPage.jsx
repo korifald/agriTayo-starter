@@ -1,9 +1,12 @@
-// pages/PreOrderFormPage.jsx
 import React, { useEffect } from "react";
-
 import { useParams, useLocation } from "react-router-dom";
-
 import PreOrderCard from "../components/PreOrderCard";
+
+/**
+ * PreOrderFormPage*
+ * Displays detailed information for a selected product
+ * and renders a pre-order form for customers to place an order.
+ */
 
 function PreOrderFormPage() {
   const { productId } = useParams();
@@ -23,37 +26,37 @@ function PreOrderFormPage() {
 
   const handleOrderSubmit = (data, onResult) => {
     const orderData = {
-        name: data.name,
-        contact: data.contact,
-        email: data.email,
-        farmer: farmer,
-        product: product.name,
-        quantity: data.quantity,
-        date: data.date,
-        address: data.address,
-        signature: data.signature,
-        agree: data.agree,
+      name: data.name,
+      contact: data.contact,
+      email: data.email,
+      farmer: farmer,
+      product: product.name,
+      quantity: data.quantity,
+      date: data.date,
+      address: data.address,
+      signature: data.signature,
+      agree: data.agree,
     };
 
-    fetch("http://localhost:5001/api/preorders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(orderData),
+    fetch("api/preorders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(orderData),
     })
-      .then(res => {
-        if(!res.ok) throw new Error("Failed to submit preorder");
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to submit preorder");
         return res.json();
       })
-      .then(data => {
+      .then((data) => {
         onResult(true);
       })
-      .catch(err => {
+      .catch((err) => {
         onResult(false);
         console.error("Error submitting preorder:", err);
       });
 
-    //console.log("Order submitted:", data);
-    //FUTURE CODE FOR SENDING DATA OF BUYERS
+    console.log("Order submitted:", data);
+
   };
 
   return (
