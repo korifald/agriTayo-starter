@@ -56,7 +56,6 @@ function PreOrderFormPage() {
       });
 
     console.log("Order submitted:", data);
-
   };
 
   return (
