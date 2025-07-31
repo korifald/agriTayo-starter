@@ -2,7 +2,6 @@
 
 
 
-          "",
 CORN:  https://upload.wikimedia.org/wikipedia/commons/4/48/9698Cuisine_foods_in_Bulacan_55.jpg
 RICE: https://upload.wikimedia.org/wikipedia/commons/4/48/9698Cuisine_foods_in_Bulacan_55.jpg
 COCONUT: https://m.media-amazon.com/images/I/91Q5aUMp+7L.jpg
