@@ -6,7 +6,12 @@ CORN:  https://upload.wikimedia.org/wikipedia/commons/4/48/9698Cuisine_foods_in_
 RICE: https://upload.wikimedia.org/wikipedia/commons/4/48/9698Cuisine_foods_in_Bulacan_55.jpg
 COCONUT: https://m.media-amazon.com/images/I/91Q5aUMp+7L.jpg
 ABACA: https://flyingketchup.ph/wp-content/uploads/2025/02/maxresdefault-2-2-780x470.jpg
-BANANA: https://flyingketchup.ph/wp-content/uploads/2025/02/maxresdefault-2-2-780x470.jpg
+
+/* Banana Link Update! */
+BANANA: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXTsvJvgLXwGUG15tzkJ5umMcAmv1I1l3A7g&s
+
+
+
 CASSAVA: https://agrifoodnetworks.org/images/made/282aedc92a2d87a1/pexels-daniel-dan-7543155_1024_617_84_c1.jpg
 SWEET PORATO: https://pindotlang.com/cdn/shop/products/cea0741d-8511-4179-a298-f0cf47bb5584.png?v=1641806782
 TARO: https://www.aboutfilipinofood.com/wp-content/uploads/gabi_food_english_filipino.jpg
