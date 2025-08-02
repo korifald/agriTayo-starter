@@ -35,15 +35,21 @@ function PreOrderCard({ productId, onSubmit }) {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.agree) {
-      alert("You must agree to the terms and conditions.");
-      return;
+const handleSubmit = (e) => {
+  e.preventDefault();
+  if (!formData.agree) {
+    alert("You must agree to the terms and conditions.");
+    return;
+  }
+  onSubmit({ productId, ...formData }, (success) => {
+    if (success) {
+      setShowOverlay(true);
+    } else {
+      alert("There was a problem submitting your preorder.");
     }
-    onSubmit({ productId, ...formData });
-    setShowOverlay(true);
-  };
+  });
+};
+
   const handleOrderAgain = () => {
     setFormData({
       name: "",

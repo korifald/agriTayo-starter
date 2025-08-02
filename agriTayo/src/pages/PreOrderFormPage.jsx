@@ -55,7 +55,6 @@ function PreOrderFormPage() {
         console.error("Error submitting preorder:", err);
       });
 
-    console.log("Order submitted:", data);
   };
 
   return (
