@@ -5,31 +5,49 @@ import ProductCard from "../components/ProductCard";
 import Hero from "../components/Hero";
 import About from "../components/About";
 
+/**
+ * HomePage
+ *
+ * Main landing page that includes:
+ * - Hero section
+ * - About section
+ * - Marketplace section with a sidebar for selecting farmers
+ *
+ * Users can browse products filtered by farmer and product name.
+ */
+
 function HomePage() {
-  const [farmers, setFarmers] = useState([]);
+  // State to track currently selected farmer and sidebar visibility
+
   const [selectedFarmer, setSelectedFarmer] = useState([]); // empty array to store data
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isToggleVisible, setIsToggleVisible] = useState(true); // Controls "Show Farmers" button
+  const [selectedProductName, setSelectedProductName] = useState("");
+
+  //backend stuff
+  const [farmers, setFarmers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  //Fetch Data from BackEnd
   useEffect(() => {
-     const fetchFarmers = async () => {
-        try {
-          const res = await fetch("api/farmers");
-          if (!res.ok) throw new Error("Failed to fetch farmer data.");
-          const data = await res.json();
-          setFarmers(data);
-          setSelectedFarmer(data[0] || null);
-        } catch (err) {
-          setError(err.message);
-        } finally {
-          setLoading(false);
-        }
-     };
-     fetchFarmers();
+    const fetchFarmers = async () => {
+      try {
+        const res = await fetch("api/farmers");
+        if (!res.ok) throw new Error("Failed to fetch farmer data.");
+        const data = await res.json();
+        setFarmers(data);
+        setSelectedFarmer(data[0] || null);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchFarmers();
   }, []);
 
+  // Close the sidebar and re-enable the toggle button after a brief delay
   const handleCloseSidebar = () => {
     setIsSidebarOpen(false);
     setTimeout(() => {
@@ -37,11 +55,13 @@ function HomePage() {
     }, 120);
   };
 
+  // Open the sidebar and hide the toggle button
   const handleShowSidebar = () => {
     setIsSidebarOpen(true);
     setIsToggleVisible(false);
   };
 
+  // Add or remove a class to the body when the sidebar is toggled (for styling)
   useEffect(() => {
     if (isSidebarOpen) {
       document.body.classList.add("sidebar-open");
@@ -56,7 +76,7 @@ function HomePage() {
     handleCloseSidebar();
   };
 
-  if (loading) return <div>Loading farmers...</div>
+  if (loading) return <div>Loading farmers...</div>;
   if (error) return <div> Error: {error}</div>;
 
   return (
@@ -106,19 +126,28 @@ function HomePage() {
               farmers={farmers}
               selectedFarmer={selectedFarmer}
               setSelectedFarmer={handleFarmerSelect}
+              selectedProductName={selectedProductName}
+              setSelectedProductName={setSelectedProductName}
             />
           </div>
           <div className="product-scroll-area">
             <div className="product-grid">
-              {/* Show products for the selected farmer */}
-              {selectedFarmer && selectedFarmer.products && selectedFarmer.products.length > 0 ? (
-                selectedFarmer.products.map((product, idx) => (
-                  <ProductCard
-                    key={idx}
-                    product={product}
-                    farmer={selectedFarmer}
-                  />
-                ))
+              {selectedFarmer &&
+              selectedFarmer.products &&
+              selectedFarmer.products.length > 0 ? (
+                selectedFarmer.products
+                  .filter((product) =>
+                    selectedProductName
+                      ? product.name === selectedProductName
+                      : true
+                  )
+                  .map((product, idx) => (
+                    <ProductCard
+                      key={idx}
+                      product={product}
+                      farmer={selectedFarmer}
+                    />
+                  ))
               ) : (
                 <div>No products available.</div>
               )}
